@@ -1,5 +1,13 @@
 1. What is Regression and Classification?examples?
 2.examples of Random forest?
-3.How is the feature selection done ? Does each set is disjoint set?
+3.How is the feature selection done ? is each set is disjoint set?
 4.what are the use case of Random Forest Classification(Banking , medicine , land use )and Regression ( marketing) ?
+5. Why do we select subset of features instead of all features ?
+6.how the random forest algorithm works ?
+7.explain the random forest for both classification and regression ?
+8.major features of random forest?
+9.why random forest is accurate among all? The variance goes done as it is average of all.
+
+
+
 
