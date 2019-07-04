@@ -1,6 +1,6 @@
 rm(list = ls())
 getwd()
-setwd("Documents/datascience/cabfareprediction")
+setwd("~/Documents/datascience/cabfareprediction")
 ###################################load library files ################################################################
 x = c("geosphere","stringr","DMwR","caret","rpart","MASS","usdm")
 lapply(x, require, character.only = TRUE)
@@ -84,7 +84,7 @@ data_cleaning_stage_cooridnates<-function(df){
     dlong = abs(radians(long1)-radians(long2))
     t1 = (sin(dlat/2)**2)+(cos(radians(lat1))*cos(radians(lat2))*sin(dlong/2)**2)
     t2 = 2*(atan2(sqrt(t1),sqrt(1-t1)))
-    return(6371*t2)
+    return(abs(6371*t2))
     
   }
 
@@ -123,15 +123,19 @@ test = test[complete.cases(test[ ,"passenger_count"]),]
 test = test[test$passenger_count > 0 & test$passenger_count < 7 ,]
 train=na.omit(train)
 sum(is.na(train))
-#train = subset(train,select = -c(pickup_longitude,dropoff_latitude,dropoff_longitude))
 sort(train$fare_amount,decreasing = TRUE)
 ############################################### end of data cleaning ################################################
+library('sqldf') 
+library('ggplot2')
 
+fareamount_by_year <- sqldf('select year, passenger_count , avg(fare_amount) as fare from train group by year,passenger_count')
+ggplot(fareamount_by_year,aes(x=year, y=fare, color=passenger_count))+geom_point(data = fareamount_by_year, aes(group = passenger_count))+geom_line(data = fareamount_by_year, aes(group = passenger_count))+ggtitle("cab fare by year , passenger_count")
 
+fareamount_by_month <- sqldf('select month, avg(fare_amount) as fare from train group by month')
 
-
-
-
+fareamount_by_distance_year <- sqldf('select year, avg(fare_amount) as fare from train group by year, fare_amount')
+ggplot(fareamount_by_distance_year,aes(x = year, y = fare, fill = year, label = year )) +
+  geom_bar(stat = "identity",width = 0.20)+ggtitle(" avg cabfare amount vs avg distance by year")
 ################################################## end of data visualizations ######################################
 MAPE = function(actual, prediction){return(mean(abs((actual - prediction)/actual))*100)}
 RMSE=function(actual, predicted){ return(sqrt(mean((actual - predicted)**2))) }
@@ -171,7 +175,7 @@ round(MSE(test1[,1],RF_Predictions),2)
 round(RMSE(test1[,1],RF_Predictions),2)
 ########################################## end of random forest ##############################################
 test$fare_amount = round(predict(RF_model, test),2)
-
+write.csv(test,"test_fare_amount_R.csv")
 
 
 

@@ -1,0 +1,33 @@
+Make sure that you change the path of DOS to the location where all files zipped are present.
+1. Rscript should be installed in your system.
+2. Run the following command
+>>>Rscript cabfareprediction.R
+3. The output of test data will be exported
+-----------------------------------------------------------------------------------------------------
+ Instruction to execute python code
+
+1. install python 3 in your machine, most preferable anaconda
+
+2.
+Pip install pandas
+Pip install numpy
+Pip install scikitlearn
+Pip install statsmodels
+
+Install in such a way that it should support  the below library files
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns 
+from datetime import datetime 
+import calendar
+from math import sin,cos,atan2,sqrt,radians,asin
+from datetime import datetime 
+import re
+import statsmodels.api as sm
+from sklearn.model_selection import train_test_split
+
+
+Execution : python cab_fare_prediction.py
+Output: the output of test data will be saved.
+-----------------------------------------------------------------------------------------------------
