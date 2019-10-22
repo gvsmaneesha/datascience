@@ -1,0 +1,38 @@
+Make sure that you change the path of DOS to the location where all files zipped are present.
+1. Rscript should be installed in your system.
+2. Run the following command
+>>>Rscript cabfareprediction.R
+3. The output of test data will be exported
+-----------------------------------------------------------------------------------------------------
+ Instruction to execute python code
+
+1. install python 3 in your machine, most preferable anaconda
+
+2.
+Pip install pandas
+Pip install numpy
+Pip install scikitlearn
+Pip install statsmodels
+
+
+import os
+import pandas as pd
+import matplotlib.pyplot as plt 
+import seaborn as sns
+import numpy as np
+#Import Libraries for decision tree
+from sklearn import tree
+from sklearn import metrics
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.feature_selection import SelectFromModel
+from sklearn.linear_model import LogisticRegression
+import xgboost as xgb
+
+
+Execution : python santandar_transaction.py
+Output: the output of test data will be saved.
+-----------------------------------------------------------------------------------------------------
