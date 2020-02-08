@@ -14,25 +14,20 @@ Pip install numpy
 Pip install scikitlearn
 Pip install statsmodels
 
-
-import os
+Install in such a way that it should support  the below library files
 import pandas as pd
-import matplotlib.pyplot as plt 
-import seaborn as sns
 import numpy as np
-#Import Libraries for decision tree
-from sklearn import tree
-from sklearn import metrics
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns 
+from datetime import datetime 
+import calendar
+from math import sin,cos,atan2,sqrt,radians,asin
+from datetime import datetime 
+import re
+import statsmodels.api as sm
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.feature_selection import SelectFromModel
-from sklearn.linear_model import LogisticRegression
-import xgboost as xgb
 
 
-Execution : python santandar_transaction.py
+Execution : python cab_fare_prediction.py
 Output: the output of test data will be saved.
 -----------------------------------------------------------------------------------------------------
