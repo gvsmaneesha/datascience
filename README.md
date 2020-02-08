@@ -15,7 +15,9 @@ Report -
 
 
 Project#2
+
 Name : CAB FARE PREDICTION
+
 Problem Statement : 
 The objective of this case study is prediction of cab fare amount for each trip based on factors that are effect the fare amount like season , time , distance , passengercount.
 Conclusion: 
@@ -27,7 +29,9 @@ Report -
 
 
 Project#3
+
 Name : SANTANDAR CUSTOMER TRANSACTION
+
 Problem Statement : 
 The objective of this case is to help people and businesses prosper based on  Anonymous Customer Satisfaction data  of Santander  Bank provided  from which we can identify is a customer satisfied? Will a customer buy this product? Can a customer pay this loan?
 Conclusion: 
