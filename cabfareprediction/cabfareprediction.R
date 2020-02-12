@@ -2,9 +2,10 @@ rm(list = ls())
 getwd()
 setwd("~/Documents/datascience/cabfareprediction")
 ###################################load library files ################################################################
-x = c("geosphere","stringr","DMwR","caret","rpart","MASS","usdm")
+x = c("geosphere","stringr","DMwR","caret","rpart","MASS","usdm",'randomForest','sqldf','ggplot2')
+install.packages(x,repos='http://cran.us.r-project.org')
 lapply(x, require, character.only = TRUE)
-
+rm(x)
 ###############################read train data########################################################################
 train=read.csv("train_cab.csv",header = T,na.strings = c(""," ",NA))
 test=read.csv("test.csv",header = T,na.strings = c(""," ",NA))
@@ -125,8 +126,6 @@ train=na.omit(train)
 sum(is.na(train))
 sort(train$fare_amount,decreasing = TRUE)
 ############################################### end of data cleaning ################################################
-library('sqldf') 
-library('ggplot2')
 
 fareamount_by_year <- sqldf('select year, passenger_count , avg(fare_amount) as fare from train group by year,passenger_count')
 ggplot(fareamount_by_year,aes(x=year, y=fare, color=passenger_count))+geom_point(data = fareamount_by_year, aes(group = passenger_count))+geom_line(data = fareamount_by_year, aes(group = passenger_count))+ggtitle("cab fare by year , passenger_count")
@@ -140,7 +139,6 @@ ggplot(fareamount_by_distance_year,aes(x = year, y = fare, fill = year, label = 
 MAPE = function(actual, prediction){return(mean(abs((actual - prediction)/actual))*100)}
 RMSE=function(actual, predicted){ return(sqrt(mean((actual - predicted)**2))) }
 MSE=function(actual, predicted){  return(mean((actual - predicted)**2)) }
-
 
 error_metrics <- data.frame(matrix(ncol = 3, nrow = 3))
 x <- c("DecisionTree", "RandomForest", "LinearRegression")
@@ -167,7 +165,6 @@ MAPE(test1[,1],predcition_Lr)
 MSE(test1[,1],predcition_Lr)
 RMSE(test1[,1],predcition_Lr)
 ############################################ end of linear regression #########################################
-library('randomForest')
 RF_model = randomForest(fare_amount ~ ., train1, importance = TRUE, ntree = 500)
 RF_Predictions = predict(RF_model, test1[,-1])
 round(MAPE(test1[,1],RF_Predictions),2)
@@ -175,7 +172,10 @@ round(MSE(test1[,1],RF_Predictions),2)
 round(RMSE(test1[,1],RF_Predictions),2)
 ########################################## end of random forest ##############################################
 test$fare_amount = round(predict(RF_model, test),2)
+
 write.csv(test,"test_fare_amount_R.csv")
+
+print("the test fare amount has been successfully calculated and exported")
 
 
 
